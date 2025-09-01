@@ -14,8 +14,6 @@ import tqdm
 import dataloader
 
 # set skip_norm as True only when you are computing the normalization stats
-audio_conf = {'num_mel_bins': 128, 'target_length': 1024, 'freqm': 24, 'timem': 192, 'mixup': 0.5, 'skip_norm': True, 'mode': 'train', 'dataset': 'audioset', 'root': '/media/yuinst/B362-Dataset/AudioSet2M/bal/'}
-audio_conf = {'target_length': 164200, 'skip_norm': True, 'mode': 'train', 'dataset': 'audioset', 'root': 'unbal'}
 
 audio_conf = {'target_length': 992, 'melbins':128, 'skip_norm': True, 'mode': 'train', 'dataset': 'audioset', 'root': 'unbal'}
 # It is only for statistics and has nothing to do with the main file
