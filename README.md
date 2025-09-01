@@ -145,3 +145,36 @@ If you find this work useful, please cite:
 
 Please add your preferred license (e.g., Apache-2.0 or MIT) at the repository root.
 
+
+## Acknowledgments
+
+Apart from the advisor and collaborators acknowledged elsewhere, the first author would like to thank **X.M. W.** and **X.Y. X.** for giving the author eyes to see the world and methods to make sense of it.
+
+
+## References (Code Bases)
+
+* BlinkDL. **RWKV-LM (RWKV-7)**. *GitHub repository.* Available at: [https://github.com/BlinkDL/RWKV-LM](https://github.com/BlinkDL/RWKV-LM) (accessed 2025-09-01).
+
+* Gong, Y. **AST — Audio Spectrogram Transformer**. *GitHub repository.* Available at: [https://github.com/YuanGongND/ast](https://github.com/YuanGongND/ast) (accessed 2025-09-01).
+
+---
+
+### Optional BibTeX
+
+```bibtex
+@misc{rwkv_lm_github,
+  author       = {BlinkDL},
+  title        = {RWKV-LM (RWKV-7)},
+  howpublished = {\url{https://github.com/BlinkDL/RWKV-LM}},
+  note         = {GitHub repository; accessed 2025-09-01}
+}
+
+@misc{ast_github,
+  author       = {Gong, Yuan},
+  title        = {AST: Audio Spectrogram Transformer},
+  howpublished = {\url{https://github.com/YuanGongND/ast}},
+  note         = {GitHub repository; accessed 2025-09-01}
+}
+```
+
+
