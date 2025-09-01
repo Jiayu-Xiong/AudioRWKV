@@ -43,8 +43,8 @@ CHUNK_LEN = 16
 flags = ['-res-usage', f'-D_C_={HEAD_SIZE}', f"-D_CHUNK_LEN_={CHUNK_LEN}", "--use_fast_math", "-O3", "-Xptxas -O3", "--extra-device-vectorization"]
 load(name="wind_backstepping", sources=[f'cuda/wkv7_cuda.cu', 'cuda/wkv7_op.cpp'], is_python_module=False, verbose=True, extra_cuda_cflags=flags)
 
-flags = ['-res-usage', f'-D_C_={HEAD_SIZE}', f"-D_CHUNK_LEN_={CHUNK_LEN}", "--use_fast_math", "-O3", "-Xptxas -O3", "--extra-device-vectorization"]
-load(name="wind_backstepping_bi", sources=[f'cuda/wkv7_cuda_fb.cu', 'cuda/wkv7_op_bi.cpp'], is_python_module=False, verbose=True, extra_cuda_cflags=flags)
+# flags = ['-res-usage', f'-D_C_={HEAD_SIZE}', f"-D_CHUNK_LEN_={CHUNK_LEN}", "--use_fast_math", "-O3", "-Xptxas -O3", "--extra-device-vectorization"]
+# load(name="wind_backstepping_bi", sources=[f'cuda/wkv7_cuda_fb.cu', 'cuda/wkv7_op_bi.cpp'], is_python_module=False, verbose=True, extra_cuda_cflags=flags)
 
 class WindBackstepping(torch.autograd.Function):
 
@@ -76,6 +76,7 @@ def RUN_CUDA_RWKV7g(q,w,k,v,a,b):
     q,w,k,v,a,b = [i.view(B,T,HC//64,64) for i in [q,w,k,v,a,b]]
     return WindBackstepping.apply(w,q,k,v,a,b).view(B,T,HC)
 
+# disabled
 class WindBackstepping_BiT(torch.autograd.Function):
     """
     PyTorch Autograd Function for the bidirectional Wind Backstepping (RWKV-like) model.
@@ -182,6 +183,7 @@ class WindBackstepping_BiT(torch.autograd.Function):
 
 
 # Helper function to run the bidirectional layer
+# disabled
 def RUN_CUDA_RWKV7g_BiT(q_in, w_in, k_in, v_in, a_in, b_in, g_in):
     """
     Applies the WindBackstepping_Bi layer, handling tensor reshaping for compatibility
@@ -222,6 +224,7 @@ def RUN_CUDA_RWKV7g_BiT(q_in, w_in, k_in, v_in, a_in, b_in, g_in):
     # Reshape the output back to (B, T, H*C)
     return result.view(B, T, HC)
 
+# disabled
 class WindBackstepping_BiB(torch.autograd.Function):
     @staticmethod
     def forward(ctx, w, q, k, v, a, b, g):
@@ -272,6 +275,7 @@ class WindBackstepping_BiB(torch.autograd.Function):
         return dw, dq, dk, dv, da, db, dg
 
 
+# disabled
 def RUN_CUDA_RWKV7g_BiB(q_in, w_in, k_in, v_in, a_in, b_in, g_in):
     B, T, HC = q_in.shape
     H = HC // 64
