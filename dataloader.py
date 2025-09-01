@@ -247,7 +247,7 @@ class AudiosetDataset(Dataset):
         return len(self.data)
 
 
-
+# 1D waveform, disabled
 class AudiosetWaveform(Dataset):
     def __init__(self, csv_path, audio_conf, label_csv=None):
         """
@@ -307,11 +307,6 @@ class AudiosetWaveform(Dataset):
             waveform = m(waveform)
         elif p < 0:
             waveform = waveform[:, 0:self.target_len]
-        # w = waveform.data.numpy()
-        # np.save(datum['wav'].replace(self.root, '/media/yuinst/B362-Dataset/ASnpy/bal/').replace('.wav', '_data') + '.npy', w)
-        # l = label_indices.data.numpy()
-        # np.save(datum['wav'].replace(self.root, '/media/yuinst/B362-Dataset/ASnpy/bal/').replace('.wav', '_label') + '.npy', l)
-        # print(waveform.shape, sr)
         return waveform, label_indices
 
     def __len__(self):
@@ -347,60 +342,6 @@ class AudiosetSpec(Dataset):
         self.label_num = len(self.index_dict)
         self.target_len = self.audio_conf.get('target_length')
         print('number of classes is {:d}'.format(self.label_num))
-
-    def __getitem____(self, index):
-        t0 = time.perf_counter()
-
-        # 1. 读 datum & 构造 label
-        datum = self.data[index]
-        t1 = time.perf_counter()
-        print(f"[1] load datum & init labels: {t1 - t0:.4f}s")
-
-        label_indices = np.zeros(self.label_num)
-        for label_str in datum['labels'].split(','):
-            label_indices[int(self.index_dict[label_str])] = 1.0
-        t2 = time.perf_counter()
-        print(f"[2] build label_indices: {t2 - t1:.4f}s")
-
-        label_indices = torch.FloatTensor(label_indices)
-
-        # 2. 读取 waveform
-        waveform, sr = torchaudio.load(datum['wav'], backend="sox")
-        t3 = time.perf_counter()
-        print(f"[3] torchaudio.load: {t3 - t2:.4f}s (sr={sr})")
-
-        # 3. 采样率不对时简单降采样
-        if sr != 16000:
-            waveform = waveform[:, ::2]
-        print(waveform.shape)
-        t4 = time.perf_counter()
-        print(f"[4] resample/decimate: {t4 - t3:.4f}s")
-
-        # 4. 计算 mel fbank
-        fbank = torchaudio.compliance.kaldi.fbank(
-            waveform,
-            htk_compat=True,
-            sample_frequency=16000,
-            use_energy=False,
-            window_type='hanning',
-            num_mel_bins=self.melbins,
-            dither=0.0,
-            frame_shift=10
-        )
-        t5 = time.perf_counter()
-        print(f"[5] compute fbank: {t5 - t4:.4f}s; shape={fbank.shape}; dtype={fbank.dtype}")
-
-        # 5. 切/补齐到 target_len
-        p = self.target_len - fbank.shape[0]
-        if p > 0:
-            fbank = torch.nn.ZeroPad2d((0, 0, 0, p))(fbank)
-        elif p < 0:
-            fbank = fbank[:self.target_len, :]
-        t6 = time.perf_counter()
-        print(f"[6] pad/cut to length: {t6 - t5:.4f}s")
-
-        # 最终返回
-        return fbank, label_indices
     
     def __getitem__(self, index):
         """
@@ -425,7 +366,6 @@ class AudiosetSpec(Dataset):
             sampler = torchaudio.transforms.Resample(sr, 32000)
             waveform = sampler(waveform)
             
-        # np.savez_compressed(datum['wav'].replace(self.root, '/media/yuinst/B362-Dataset/ASnpy/bal/').replace('.wav', '_data') + '.npz', waveform)
         fbank = torchaudio.compliance.kaldi.fbank(waveform, htk_compat=True, sample_frequency=32000, use_energy=False,
                                                   window_type='hanning', num_mel_bins=self.melbins, dither=0.0, frame_shift=10, low_freq=50, high_freq=14000)
         # fbank.cpu()
@@ -439,11 +379,6 @@ class AudiosetSpec(Dataset):
         elif p < 0:
             fbank = fbank[0:self.target_len, :]
         # print(fbank.shape, p, fbank.shape[0])
-        # f = fbank.data.numpy()
-        # np.savez_compressed(datum['wav'].replace(self.root, '/media/yuinst/B362-Dataset/ASnpy/bal/').replace('.wav', '_data') + '.npz', f)
-        # l = label_indices.data.numpy()
-        # np.savez_compressed(datum['wav'].replace(self.root, '/media/yuinst/B362-Dataset/ASnpy/bal/').replace('.wav', '_label') + '.npz', l)
-        # 
         # assert False
         # print(waveform.shape, sr)
         if not self.skip_norm:
