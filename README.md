@@ -7,10 +7,11 @@ This repository publishes **AudioSet-2M** pretrained checkpoints for three scale
 
 ## 🔗 Model Zoo (AudioSet-2M Pretraining)
 
-| Variant      | Training/Validation Log(Tensorboard)                                      | Model Weights (`.pth`)                                       | Optimizer State                                              |
+| Variant      | Log(Tensorboard)                                      | Model Weights (`.pth`)                                       | Optimizer State                                              |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **A-RWKV-S** | [Log](https://drive.google.com/file/d/1Czz8TUNC2zjQJ0Hm6xxtCQyN7EzIW3pq/view?usp=drive_link) | [Model `.pth`](https://drive.google.com/file/d/1yU3umH5BwVCpJA5sZgF53R1Gg1IYOW1Q/view?usp=drive_link) | [State](https://drive.google.com/file/d/1nTubGtVptCqFHXXYBmuTgotD7xR6j6n4/view?usp=drive_link) |
-| **A-RWKV-B** | [Log](https://drive.google.com/file/d/1cNADVp2U_LZlRFVdWiaaHVzBtdtH8DUs/view?usp=drive_link) | [Model `.pth`](https://drive.google.com/file/d/1TOL-j5iU1U2BPRgEV6q2Ro1Gql6Bvl47/view?usp=drive_link) | [State](https://drive.google.com/file/d/1S0hpEwMqPhY9Vj4RGNra8KfqwFJF5W0O/view?usp=drive_link) |
+| **A-RWKV-T(mAP=0.300)** | [Log](https://drive.google.com/file/d/1F1UUzYoVNr88LMDXWC-rG-a2g6hIIFzJ/view?usp=drive_link) | [Model `.pth`](https://drive.google.com/file/d/1Q-7HhaVX59BmN-PRJgl2LZj0OvQabZP9/view?usp=drive_link) | [State](https://drive.google.com/file/d/1PfEeKS5Bn1u2uCg5wwpJnNAOpnZQxWOV/view?usp=drive_link) |
+| **A-RWKV-S(mAP=0.378)** | [Log](https://drive.google.com/file/d/1Czz8TUNC2zjQJ0Hm6xxtCQyN7EzIW3pq/view?usp=drive_link) | [Model `.pth`](https://drive.google.com/file/d/1yU3umH5BwVCpJA5sZgF53R1Gg1IYOW1Q/view?usp=drive_link) | [State](https://drive.google.com/file/d/1nTubGtVptCqFHXXYBmuTgotD7xR6j6n4/view?usp=drive_link) |
+| **A-RWKV-B(mAP=0.409)** | [Log](https://drive.google.com/file/d/1cNADVp2U_LZlRFVdWiaaHVzBtdtH8DUs/view?usp=drive_link) | [Model `.pth`](https://drive.google.com/file/d/1TOL-j5iU1U2BPRgEV6q2Ro1Gql6Bvl47/view?usp=drive_link) | [State](https://drive.google.com/file/d/1S0hpEwMqPhY9Vj4RGNra8KfqwFJF5W0O/view?usp=drive_link) |
 
 We do not provide the fine-tuning results of other small datasets for the time being. For datasets such as VGGSound that may have different acquisition times, we will publish the cleaned csv files and dataloader. As far as we know, it is very difficult to obtain samples of YouTube through yt-dlp again. To respect user privacy, we are also unable to provide samples.
 
@@ -131,10 +132,8 @@ optimizer.load_state_dict(torch.load(optim_ckpt, map_location="cpu"))
 If you find this work useful, please cite:
 
 ```bibtex
-@article{audiorwkv2025,
+@article{updating, coming soon,
   title   = {AudioRWKV: Efficient and Stable Bidirectional RWKV for Audio Pattern Recognition},
-  author  = {Xiong, Jiayu and Xue, Jun and Kwan, Jianlong and Wang, Jing},
-  journal = {arXiv preprint arXiv:XXXXX},
   year    = {2025}
 }
 ```
@@ -148,33 +147,14 @@ Please add your preferred license (e.g., Apache-2.0 or MIT) at the repository ro
 
 ## Acknowledgments
 
-Apart from the advisor and collaborators acknowledged elsewhere, the first author would like to thank **X.M. W.** and **X.Y. X.** for giving the author eyes to see the world and methods to make sense of it.
+Apart from the advisor and collaborators acknowledged elsewhere, the first author (Jiayu Xiong) would like to thank **X.M. W.** and **X.Y. X.**
 
 
 ## References (Code Bases)
 
-* BlinkDL. **RWKV-LM (RWKV-7)**. *GitHub repository.* Available at: [https://github.com/BlinkDL/RWKV-LM](https://github.com/BlinkDL/RWKV-LM) (accessed 2025-09-01).
+* BlinkDL. **RWKV-LM (RWKV-7)**. *GitHub repository.* Available at: [https://github.com/BlinkDL/RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
-* Gong, Y. **AST — Audio Spectrogram Transformer**. *GitHub repository.* Available at: [https://github.com/YuanGongND/ast](https://github.com/YuanGongND/ast) (accessed 2025-09-01).
+* Gong, Y. **AST — Audio Spectrogram Transformer**. *GitHub repository.* Available at: [https://github.com/YuanGongND/ast](https://github.com/YuanGongND/ast).
 
----
-
-### Optional BibTeX
-
-```bibtex
-@misc{rwkv_lm_github,
-  author       = {BlinkDL},
-  title        = {RWKV-LM (RWKV-7)},
-  howpublished = {\url{https://github.com/BlinkDL/RWKV-LM}},
-  note         = {GitHub repository; accessed 2025-09-01}
-}
-
-@misc{ast_github,
-  author       = {Gong, Yuan},
-  title        = {AST: Audio Spectrogram Transformer},
-  howpublished = {\url{https://github.com/YuanGongND/ast}},
-  note         = {GitHub repository; accessed 2025-09-01}
-}
-```
 
 
