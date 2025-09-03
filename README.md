@@ -142,15 +142,6 @@ If you find this work useful, please cite:
 
 ------
 
-## 📜 License
-
-- Code: PolyForm Noncommercial 1.0.0 — non-commercial use only; keep copyright and license notices.
-- Docs/Images/Assets: CC BY-NC 4.0 — attribution required; non-commercial only.
-
-For commercial licensing, please contact: <yuinst@outlook.com>.
-
-------
-
 ## Acknowledgments
 
 Apart from the advisor and collaborators acknowledged elsewhere, the first author (Jiayu Xiong) would like to thank **X.M. W.** and **X.Y. X.**
