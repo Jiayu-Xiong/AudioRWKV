@@ -132,8 +132,10 @@ optimizer.load_state_dict(torch.load(optim_ckpt, map_location="cpu"))
 If you find this work useful, please cite:
 
 ```bibtex
-@article{updating, coming soon,
+@article{xiong2025audiorwkv,
   title   = {AudioRWKV: Efficient and Stable Bidirectional RWKV for Audio Pattern Recognition},
+  author  = {Xiong, Jiayu and Xue, Jun and Kwan, Jianlong and Wang, Jing},
+  journal = {arXiv preprint arXiv:2509.02167},
   year    = {2025}
 }
 ```
