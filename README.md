@@ -142,10 +142,6 @@ If you find this work useful, please cite:
 
 ------
 
-## 📜 License
-
-Please add your preferred license (e.g., Apache-2.0 or MIT) at the repository root.
-
 
 ## Acknowledgments
 
