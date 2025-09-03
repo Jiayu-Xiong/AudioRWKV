@@ -142,6 +142,14 @@ If you find this work useful, please cite:
 
 ------
 
+## 📜 License
+
+- Code: PolyForm Noncommercial 1.0.0 — non-commercial use only; keep copyright and license notices.
+- Docs/Images/Assets: CC BY-NC 4.0 — attribution required; non-commercial only.
+
+For commercial licensing, please contact: <yuinst@outlook.com>.
+
+------
 
 ## Acknowledgments
 
